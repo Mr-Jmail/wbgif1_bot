@@ -26,6 +26,7 @@ fromWBScene.on("text", async ctx => {
     await ctx.telegram.sendAnimation(ctx.from.id, { source: gifPath }, { height: 1200, width: 900 })
 
     await ctx.telegram.deleteMessage(ctx.from.id, messageId).catch(err => console.log(err))
+    ctx.scene.leave()
 })
 
 function normalizeWildberriesLink(input) {
