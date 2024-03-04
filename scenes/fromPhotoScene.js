@@ -9,6 +9,11 @@ fromPhotoScene.enter(ctx => {
     ctx.reply("Пришли фотографии для генерации GIF. После того как отправишь все нужные фото, нажми на кнопку ниже", { reply_markup: { inline_keyboard: [[{ text: "Сгенерировать gif", callback_data: "generateGif" }]] } })
 })
 
+fromWBScene.command("/cancel", ctx => {
+    ctx.reply("Создание gif отменено")
+    ctx.scene.leave()
+})
+
 fromPhotoScene.on("photo", async ctx => ctx.scene.session.state.photoes.push(await ctx.telegram.getFileLink(ctx.message.photo[ctx.message.photo.length - 1].file_id)))
 
 fromPhotoScene.action("generateGif", async ctx => {

@@ -7,6 +7,11 @@ const fromWBScene = new Scenes.BaseScene("fromWBScene")
 
 fromWBScene.enter(ctx => ctx.reply("Пришли ссылку/артикул для генерации GIF с карточки товара Wildberries"))
 
+fromWBScene.command("/cancel", ctx => {
+    ctx.reply("Создание gif отменено")
+    ctx.scene.leave()
+})
+
 fromWBScene.on("text", async ctx => {
     const messageId = (await ctx.reply("Проверяю ссылку")).message_id
     const url = normalizeWildberriesLink(ctx.message.text)
