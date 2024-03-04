@@ -9,7 +9,7 @@ fromPhotoScene.enter(ctx => {
     ctx.reply("Пришли фотографии для генерации GIF. После того как отправишь все нужные фото, нажми на кнопку ниже", { reply_markup: { inline_keyboard: [[{ text: "Сгенерировать gif", callback_data: "generateGif" }]] } })
 })
 
-fromWBScene.command("/cancel", ctx => {
+fromPhotoScene.command("/cancel", ctx => {
     ctx.reply("Создание gif отменено")
     ctx.scene.leave()
 })
