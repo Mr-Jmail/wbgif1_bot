@@ -23,7 +23,7 @@ fromPhotoScene.action("generateGif", async ctx => {
 
     await ctx.telegram.editMessageText(ctx.from.id, messageId, undefined, "Загружаю gif в телеграм")
 
-    await ctx.telegram.sendDocument(ctx.from.id, { source: gifPath })
+    await ctx.telegram.sendDocument(ctx.from.id, { source: gifPath }, { disable_content_type_detection: false })
 
     await ctx.telegram.deleteMessage(ctx.from.id, messageId).catch(err => console.log(err))
 
