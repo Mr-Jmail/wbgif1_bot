@@ -16,7 +16,7 @@ fromWBScene.on("text", async ctx => {
     const messageId = (await ctx.reply("Проверяю ссылку")).message_id
     const url = normalizeWildberriesLink(ctx.message.text)
     if (!url) return ctx.reply("Отправь либо ссылку (пример: https://www.wildberries.ru/catalog/1111111111/), либо артикул (пример: 1111111111)")
-
+    console.log(url)
     await ctx.telegram.editMessageText(ctx.from.id, messageId, undefined, "Скачиваю фотографии..")
 
     var imageUrls = await getImageUrlsFromWB(url)
