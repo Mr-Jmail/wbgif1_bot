@@ -1,6 +1,6 @@
 const { Scenes } = require("telegraf")
 const getImageUrlsFromWB = require("../getImageUrlsFromWB")
-const createGifFromImages = require("../createGifFromImages")
+const generateSlideshowFromURLs = require("../generateSlideshowFromURLs")
 
 const fromWBScene = new Scenes.BaseScene("fromWBScene")
 
@@ -18,20 +18,21 @@ fromWBScene.on("text", async ctx => {
 
     await ctx.telegram.editMessageText(ctx.from.id, messageId, undefined, "Генерирую gif из полученных фотографий")
 
-    const gifPath = `${ctx.from.id}.gif`
-    await createGifFromImages(imageUrls, gifPath)
+    const gifPath = `${ctx.from.id}.mp4`
+    await generateSlideshowFromURLs(imageUrls, gifPath)
 
     await ctx.telegram.editMessageText(ctx.from.id, messageId, undefined, "Загружаю gif в телеграм")
 
-    await ctx.telegram.sendDocument(ctx.from.id, { source: gifPath }, { disable_content_type_detection: true })
+    await ctx.telegram.sendAnimation(ctx.from.id, { source: gifPath })
+    
+    fs.rmSync(gifPath)
 
     await ctx.telegram.deleteMessage(ctx.from.id, messageId).catch(err => console.log(err))
     ctx.scene.leave()
 })
 
 function normalizeWildberriesLink(input) {
-    if (input.startsWith("https://www.wildberries.ru/catalog"))
-    {
+    if (input.startsWith("https://www.wildberries.ru/catalog")) {
         if (input.endsWith("/detail.aspx")) return input;
         return input + (input.endsWith("/") ? "detail.aspx" : "/detail.aspx");
     }
