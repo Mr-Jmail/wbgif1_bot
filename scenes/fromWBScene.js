@@ -23,7 +23,7 @@ fromWBScene.on("text", async ctx => {
 
     await ctx.telegram.editMessageText(ctx.from.id, messageId, undefined, "Загружаю gif в телеграм")
 
-    await ctx.telegram.sendAnimation(ctx.from.id, { source: gifPath }, { height: 1200, width: 900 })
+    await ctx.telegram.sendDocument(ctx.from.id, { source: gifPath })
 
     await ctx.telegram.deleteMessage(ctx.from.id, messageId).catch(err => console.log(err))
     ctx.scene.leave()
