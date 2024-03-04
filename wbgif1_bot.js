@@ -14,7 +14,7 @@ bot.use(stage.middleware())
 bot.start(ctx => ctx.reply("Привет, я помогу тебе создать gif. У меня есть два режима, выбери тот, который тебе нужен", { reply_markup: { inline_keyboard: [[{ text: "Создать gif из фотографий", callback_data: "fromPhoto" }], [{ text: "Создать gif из карточки товара WB", callback_data: "fromWB" }]]}}))
 
 bot.action("fromWB", ctx => ctx.scene.enter("fromWBScene"))
-bot.command("generate_from_wb", ctx => ctx.scene.enter("fromPhotoScene"))
+bot.command("generate_from_wb", ctx => ctx.scene.enter("fromWBScene"))
 
 bot.action("fromPhoto", ctx => ctx.scene.enter("fromPhotoScene"))
 bot.command("generate_from_photo", ctx => ctx.scene.enter("fromPhotoScene"))
